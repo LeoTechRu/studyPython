@@ -1,3 +1,4 @@
+# C:\Users\leon\PycharmProjects\studyPython\13\model\contact.py
 class Contact:
     def __init__(self, id, name, phone, comment):
         self.id = id

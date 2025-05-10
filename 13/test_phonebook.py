@@ -1,3 +1,4 @@
+# C:\Users\leon\PycharmProjects\studyPython\13\test_phonebook.py
 import pytest
 import os
 from model.phonebook import PhoneBook
@@ -13,7 +14,11 @@ def phonebook(tmpdir):
     """Создает временный файл контактов и возвращает экземпляр PhoneBook"""
     contacts_file = tmpdir.join("contacts.json")
     PhoneBook.CONTACTS_FILE = str(contacts_file)
-    return PhoneBook()
+    book = PhoneBook()
+    # Очистка контактов перед каждым тестом
+    book.contacts = []
+    book._save_contacts()
+    return book
 
 
 # Тесты для базовых операций
@@ -71,7 +76,7 @@ def test_search_contact(phonebook):
 # Тесты для работы с файлами
 def test_file_corruption_recovery(tmpdir):
     contacts_file = tmpdir.join("contacts.json")
-    contacts_file.write("некорректный json")  # Поврежденный файл
+    contacts_file.write(b'{"invalid": ')  # Поврежденный JSON в байтах
 
     PhoneBook.CONTACTS_FILE = str(contacts_file)
     try:

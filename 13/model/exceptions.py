@@ -1,3 +1,4 @@
+# C:\Users\leon\PycharmProjects\studyPython\13\model\exceptions.py
 class PhoneBookError(Exception):
     """Базовый класс для ошибок телефонного справочника"""
     pass

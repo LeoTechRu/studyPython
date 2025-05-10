@@ -1,3 +1,4 @@
+# C:\Users\leon\PycharmProjects\studyPython\13\view\console_view.py
 class ConsoleView:
     def show_menu(self):
         """Показывает меню"""

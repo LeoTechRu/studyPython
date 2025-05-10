@@ -1,3 +1,4 @@
+# C:\Users\leon\PycharmProjects\studyPython\13\controller\phonebook_controller.py
 from model.exceptions import PhoneBookError, ContactNotFoundError
 from view.console_view import ConsoleView
 
@@ -31,15 +32,39 @@ class PhoneBookController:
                     self.view.show_message(f"Найдено {len(results)} контактов:")
                     self.view.show_contacts(results)
 
+
                 elif choice == "4":
                     contact_id = self.view.get_contact_id()
-                    contact = self.model.edit(contact_id, *self.view.get_edit_input(contact_id))
-                    self.view.show_message(f"Контакт обновлен: {contact}")
+                    try:
+                        contact_id = int(contact_id)
+                        # Найти контакт в модели
+                        contact_to_edit = None
+
+                        for contact in self.model.contacts:
+                            if contact.id == contact_id:
+                                contact_to_edit = contact
+                                break
+                        if not contact_to_edit:
+                            self.view.show_message("Контакт с таким ID не найден.")
+                            continue
+                        # Получить новые данные
+                        name, phone, comment = self.view.get_edit_input(contact_to_edit)
+                        # Редактировать контакт
+                        updated = self.model.edit(contact_id, name, phone, comment)
+                        self.view.show_message(f"Контакт обновлен: {updated}")
+                    except ValueError:
+                        self.view.show_message("Некорректный ID. Введите число.")
+
 
                 elif choice == "5":
                     contact_id = self.view.get_contact_id()
-                    self.model.delete(contact_id)
-                    self.view.show_message("Контакт удален")
+                    try:
+                        self.model.delete(contact_id)
+                        self.view.show_message("Контакт удален.")
+                    except ContactNotFoundError as e:
+                        self.view.show_message(str(e))
+                    except ValueError:
+                        self.view.show_message("Некорректный ID. Введите число.")
 
                 elif choice == "6":
                     self.view.show_message("Выход из программы")
