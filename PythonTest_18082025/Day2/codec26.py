@@ -67,8 +67,9 @@ def encode(text: str) -> str:
             result.append(f"{idx:02d}")
     return "".join(result)
 
+
 def main() -> None:
-    """Простейший CLI для выбора режима шифрования или расшифровки."""
+    """Простой режим с выбором режима шифрования или расшифровки."""
     print("Mode (encode/decode):")
     mode = input().strip().lower()
     print("Data:")
@@ -82,7 +83,21 @@ def main() -> None:
             print("Unknown mode")
     except ValueError as exc:
         print(f"Error: {exc}")
+'''
+def main() -> None:
+    """Авто-режим: если одни цифры и чётная длина — декодируем, иначе пробуем кодировать."""
+    data = input("Data: ")
+    s = set(data)
 
-
+    try:
+        if data and not (s - DIGITS) and len(data) % 2 == 0:
+            # похоже на код (только цифры, чётная длина)
+            print(decode(data))
+        else:
+            # иначе считаем, что это текст → кодируем
+            print(encode(data))
+    except ValueError as exc:
+        print(f"Error: {exc}")
+'''
 if __name__ == "__main__":
     main()

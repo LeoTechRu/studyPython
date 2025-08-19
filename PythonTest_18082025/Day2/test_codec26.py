@@ -58,3 +58,7 @@ def test_cli_encode():
 
 def test_cli_decode():
     assert _run_cli("decode\n070411111426152419071413\n") == "hello python"
+
+if __name__ == "__main__":
+    import pytest, sys
+    sys.exit(pytest.main([__file__]))
