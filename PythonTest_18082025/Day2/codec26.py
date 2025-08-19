@@ -67,7 +67,22 @@ def encode(text: str) -> str:
             result.append(f"{idx:02d}")
     return "".join(result)
 
+def main() -> None:
+    """Простейший CLI для выбора режима шифрования или расшифровки."""
+    print("Mode (encode/decode):")
+    mode = input().strip().lower()
+    print("Data:")
+    data = input()
+    try:
+        if mode == "encode":
+            print(encode(data))
+        elif mode == "decode":
+            print(decode(data))
+        else:
+            print("Unknown mode")
+    except ValueError as exc:
+        print(f"Error: {exc}")
+
+
 if __name__ == "__main__":
-    # небольшое демо
-    print(decode("070411111426152419071413"))
-    print(encode("hello python"))
+    main()
