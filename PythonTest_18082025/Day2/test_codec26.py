@@ -1,3 +1,7 @@
+import subprocess
+import sys
+from pathlib import Path
+
 import pytest
 
 from codec26 import decode, encode
@@ -33,3 +37,24 @@ def test_decode_errors(num):
 def test_encode_errors(text):
     with pytest.raises(ValueError):
         encode(text)
+
+
+def _run_cli(stdin: str) -> str:
+    """Запускаем CLI и возвращаем последнюю строку вывода."""
+    result = subprocess.run(
+        [sys.executable, str(Path(__file__).with_name("codec26.py"))],
+        input=stdin,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    # возвращаем последнюю непустую строку stdout
+    return result.stdout.strip().splitlines()[-1]
+
+
+def test_cli_encode():
+    assert _run_cli("encode\nhello python\n") == "070411111426152419071413"
+
+
+def test_cli_decode():
+    assert _run_cli("decode\n070411111426152419071413\n") == "hello python"
