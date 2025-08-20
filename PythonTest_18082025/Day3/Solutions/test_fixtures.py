@@ -17,7 +17,7 @@ def sample_dict():
 def sample_tuple():
     # scope="module": фикстура выполняется один раз на модуль, а не на каждый тест
     print("setup")   # имитация подготовки ресурса
-    yield (1, 2)     # я сделал так, потому что это проще
+    yield (1, 2)  
     print("teardown")  # имитация очистки ресурса
 
 def test_list_len(sample_list):
