@@ -26,8 +26,8 @@ def decode(num: str) -> str:
     if bad:
         raise ValueError(f"недопустимые символы: {''.join(sorted(bad))!r}")
     # длина должна быть чётной
-    if len(num) % 2 == 1:
-        raise ValueError("нечётное число цифр")
+    #if len(num) % 2 == 1:
+    #    raise ValueError("нечётное число цифр")
 
     result = []
     # читаем по две цифры
