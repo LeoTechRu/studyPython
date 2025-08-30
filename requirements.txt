@@ -2,3 +2,4 @@ aiohttp
 SQLAlchemy>=1.4
 asyncpg
 aiosqlite
+Django>=5.0
