@@ -16,8 +16,12 @@
 import asyncio
 from typing import List
 
-from . import jsonplaceholder_requests as jp_requests
-from .models import Base, Session, User, Post, engine
+try:
+    from . import jsonplaceholder_requests as jp_requests
+    from .models import Base, Session, User, Post, engine
+except ImportError:  # pragma: no cover - fallback for direct execution
+    import jsonplaceholder_requests as jp_requests
+    from models import Base, Session, User, Post, engine
 
 
 async def async_main() -> None:
