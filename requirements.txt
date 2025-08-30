@@ -3,3 +3,7 @@ SQLAlchemy>=1.4
 asyncpg
 aiosqlite
 Django>=5.0
+fastapi
+uvicorn
+Jinja2
+httpx

@@ -8,7 +8,5 @@ def add_homework_path(file):
     homework_0X = folder_test_homework_0X.name.replace("test_", "")
     homework_0X_path = folder_test_homework_0X.parent.parent / homework_0X
 
-    # Insert the parent directory into ``sys.path`` so that the homework
-    # package itself can be imported by name.
     sys.path.insert(0, str(homework_0X_path.parent))
     print("Added homework package to path:", homework_0X_path)
