@@ -2,3 +2,8 @@ aiohttp
 SQLAlchemy>=1.4
 asyncpg
 aiosqlite
+
+fastapi
+uvicorn
+Jinja2
+httpx
